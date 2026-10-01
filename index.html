@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Savia</title>
+<meta name="description" content="Savia · tu plan de alimentación con seguimiento">
+<meta name="theme-color" content="#4A5424">
+<!-- iOS: ícono y modo app al agregar a la pantalla de inicio -->
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Savia">
+<meta name="application-name" content="Savia">
+<!-- Android / escritorio -->
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<style>
+  html,body{margin:0;padding:0;height:100%;background:#F6F7EE;font-family:'Outfit','Segoe UI',system-ui,sans-serif;color:#333A17}
+  #app{position:fixed;inset:0;width:100%;height:100%;border:0;background:#F6F7EE}
+  #splash{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:#F6F7EE;transition:opacity .35s;z-index:2}
+  #splash.off{opacity:0;pointer-events:none}
+  #splash .leaf{width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,#55612A,#3E4720);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(74,84,36,.18)}
+  #splash .leaf svg{width:48px;height:48px}
+  #splash .n{font-size:22px;font-weight:600;color:#4A5424;letter-spacing:.3px}
+  #splash .s{font-size:13px;color:#686D55}
+  .dots span{display:inline-block;width:6px;height:6px;margin:0 2px;border-radius:50%;background:#7D9636;animation:b 1.2s infinite}
+  .dots span:nth-child(2){animation-delay:.2s}.dots span:nth-child(3){animation-delay:.4s}
+  @keyframes b{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-4px)}}
+  #err{display:none;max-width:420px;margin:0 20px;padding:14px 16px;background:#fff;border:1px solid #E2E5CE;border-radius:14px;font-size:14px;line-height:1.5;text-align:center}
+  #err a{color:#4A5424;font-weight:600}
+  /* Aviso para instalar (solo cuando NO está instalada) */
+  #tip{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:3;display:none;gap:12px;align-items:center;background:#333A17;color:#fff;border-radius:16px;padding:12px 14px;font-size:13.5px;line-height:1.4;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+  #tip.on{display:flex}
+  #tip .ic{width:38px;height:38px;border-radius:11px;flex:0 0 38px;background:linear-gradient(135deg,#55612A,#3E4720);display:flex;align-items:center;justify-content:center}
+  #tip .ic svg{width:26px;height:26px}
+  #tip .tx{flex:1}
+  #tip b{color:#C6D287}
+  #tip button{background:transparent;border:0;color:#C6D287;font-size:20px;line-height:1;padding:4px 6px;cursor:pointer}
+</style>
+</head>
+<body>
+<div id="splash">
+  <div class="leaf"><svg viewBox="0 0 24 24"><path d="M20.5 3.5C12 3.2 5.6 7.8 4.6 16.2c-.2 1.6.6 2.8 2.2 2.6C15.6 17.6 20.6 12 20.5 3.5z" fill="#fff" opacity=".96"/><path d="M6.8 17.4C9 13.2 12.6 9.6 17.4 6.9" stroke="#4A5424" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div>
+  <div class="n">Savia</div>
+  <div class="s" id="splashTxt">Abriendo tu plan…</div>
+  <div class="dots" id="dots"><span></span><span></span><span></span></div>
+  <div id="err"></div>
+</div>
+<iframe id="app" title="Savia" allow="clipboard-write; web-share" referrerpolicy="no-referrer-when-downgrade"></iframe>
+<div id="tip" role="status">
+  <div class="ic"><svg viewBox="0 0 24 24"><path d="M20.5 3.5C12 3.2 5.6 7.8 4.6 16.2c-.2 1.6.6 2.8 2.2 2.6C15.6 17.6 20.6 12 20.5 3.5z" fill="#fff" opacity=".96"/></svg></div>
+  <div class="tx" id="tipTxt"></div>
+  <button type="button" aria-label="Cerrar" onclick="cerrarTip()">×</button>
+</div>
+<script>
+(function(){
+  var q = new URLSearchParams(location.search);
+  var a = String(q.get('a') || '').trim();      // ID de la implementación de Apps Script
+  var t = String(q.get('t') || '').trim();      // token del paciente
+  var okA = /^[A-Za-z0-9_-]{20,}$/.test(a), okT = /^[A-Za-z0-9_-]{4,64}$/.test(t);
+  var err = document.getElementById('err'), fr = document.getElementById('app');
+  if (!okA || !okT){
+    document.getElementById('dots').style.display = 'none';
+    document.getElementById('splashTxt').textContent = '';
+    err.style.display = 'block';
+    err.innerHTML = 'Este enlace está incompleto. Pide a tu consultorio que te comparta de nuevo tu liga de Savia.';
+    return;
+  }
+  var destino = 'https://script.google.com/macros/s/' + a + '/exec?page=paciente&t=' + encodeURIComponent(t);
+  var listo = false;
+  function quitarSplash(){ if (listo) return; listo = true; document.getElementById('splash').classList.add('off'); }
+  fr.addEventListener('load', function(){ setTimeout(quitarSplash, 250); });
+  fr.src = destino;
+  // Si Google tarda mucho, se deja ver la app y un enlace directo de respaldo.
+  setTimeout(function(){
+    if (listo) return;
+    document.getElementById('dots').style.display = 'none';
+    err.style.display = 'block';
+    err.innerHTML = 'Está tardando más de lo normal. <a href="' + destino + '">Abrir directo en el navegador</a>';
+    setTimeout(quitarSplash, 6000);
+  }, 12000);
+
+  // Aviso de instalación (una vez por dispositivo, solo si no está instalada)
+  var standalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
+  var visto = false; try { visto = localStorage.getItem('savia_tip_inicio') === '1'; } catch(e){}
+  var ua = navigator.userAgent || '';
+  var esIOS = /iPhone|iPad|iPod/.test(ua), esAndroid = /Android/.test(ua);
+  if (!standalone && !visto && (esIOS || esAndroid)){
+    var txt = esIOS
+      ? 'Ten tu plan a la mano: toca <b>Compartir</b> <span style="font-size:15px">⎙</span> y luego <b>Agregar a pantalla de inicio</b>.'
+      : 'Ten tu plan a la mano: abre el menú <b>⋮</b> y elige <b>Agregar a pantalla de inicio</b>.';
+    document.getElementById('tipTxt').innerHTML = txt;
+    setTimeout(function(){ document.getElementById('tip').classList.add('on'); }, 2500);
+  }
+  window.cerrarTip = function(){ document.getElementById('tip').classList.remove('on'); try { localStorage.setItem('savia_tip_inicio', '1'); } catch(e){} };
+})();
+</script>
+</body>
+</html>
