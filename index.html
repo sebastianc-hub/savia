@@ -78,14 +78,17 @@
   function quitarSplash(){ if (listo) return; listo = true; document.getElementById('splash').classList.add('off'); }
   fr.addEventListener('load', function(){ setTimeout(quitarSplash, 250); });
   fr.src = destino;
-  // Si Google tarda mucho, se deja ver la app y un enlace directo de respaldo.
+  // Mensajes mientras Google abre la app (en celular puede tardar 10-20 s la primera vez).
+  var MSGS = ['Abriendo tu plan…', 'Conectando con tu consultorio…', 'Google está preparando tu app…', 'Ya casi…'];
+  var mi = 0;
+  var rot = setInterval(function(){ if (listo){ clearInterval(rot); return; } mi = Math.min(mi + 1, MSGS.length - 1); document.getElementById('splashTxt').textContent = MSGS[mi]; }, 5000);
+  // Si de plano no llega, se deja un enlace directo de respaldo.
   setTimeout(function(){
     if (listo) return;
-    document.getElementById('dots').style.display = 'none';
     err.style.display = 'block';
     err.innerHTML = 'Está tardando más de lo normal. <a href="' + destino + '">Abrir directo en el navegador</a>';
-    setTimeout(quitarSplash, 6000);
-  }, 12000);
+    setTimeout(quitarSplash, 8000);
+  }, 30000);
 
   // Aviso de instalación (una vez por dispositivo, solo si no está instalada)
   var standalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
