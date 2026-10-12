@@ -2,110 +2,15 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Savia</title>
-<meta name="description" content="Savia · tu plan de alimentación con seguimiento">
-<meta name="theme-color" content="#4A5424">
-<!-- iOS: ícono y modo app al agregar a la pantalla de inicio -->
+<meta name="robots" content="noindex">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Savia">
-<meta name="application-name" content="Savia">
-<!-- Android / escritorio -->
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-<style>
-  /* Marca: "Savia" en cursiva que se escribe sola (trazos de Great Vibes, sin cargar fuentes) */
-  .savia-anim{display:block;width:110px;height:auto;overflow:visible}.savia-anim .sv-l{fill:#4A5424;fill-opacity:0;stroke:#4A5424;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:svTrazo .55s cubic-bezier(.5,0,.3,1) forwards,svRelleno .45s ease forwards;animation-delay:calc(var(--i) * .42s),calc(var(--i) * .42s + .45s)}@keyframes svTrazo{to{stroke-dashoffset:0}}@keyframes svRelleno{to{fill-opacity:1;stroke-width:0}}@media (prefers-reduced-motion:reduce){.savia-anim .sv-l{animation:none;fill-opacity:1;stroke-width:0}}
-
-  html,body{margin:0;padding:0;height:100%;background:#F6F7EE;font-family:'Outfit','Segoe UI',system-ui,sans-serif;color:#333A17}
-  #app{position:fixed;inset:0;width:100%;height:100%;border:0;background:#F6F7EE}
-  #splash{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:#F6F7EE;transition:opacity .35s;z-index:2}
-  #splash.off{opacity:0;pointer-events:none}
-  #splash .leaf{width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,#55612A,#3E4720);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(74,84,36,.18)}
-  #splash .leaf svg{width:48px;height:48px}
-  #splash .n{font-size:22px;font-weight:600;color:#4A5424;letter-spacing:.3px}
-  #splash .s{font-size:13px;color:#686D55}
-  /* frutita que brinca y cambia en cada salto */
-  .fruta{position:relative;width:64px;height:64px;margin:0 auto;display:block}
-  .fruta::before{content:"\1F34E";position:absolute;left:50%;bottom:12px;margin-left:-20px;width:40px;text-align:center;font-size:34px;line-height:1;animation:frutaSalto .72s cubic-bezier(.35,0,.45,1) infinite,frutaCambio 5.76s steps(1,end) infinite}
-  .fruta::after{content:"";position:absolute;left:50%;bottom:6px;width:30px;height:8px;margin-left:-15px;border-radius:50%;background:rgba(74,84,36,.2);animation:frutaSombra .72s cubic-bezier(.35,0,.45,1) infinite}
-  @keyframes frutaSalto{0%,100%{transform:translateY(0) scale(1.14,.84)}30%{transform:translateY(-18px) scale(.96,1.06)}50%{transform:translateY(-28px) scale(1,1)}70%{transform:translateY(-16px) scale(.98,1.04)}}
-  @keyframes frutaSombra{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(.5);opacity:.3}}
-  @keyframes frutaCambio{0%{content:"\1F34E"}12.5%{content:"\1F34C"}25%{content:"\1F353"}37.5%{content:"\1F34A"}50%{content:"\1F95D"}62.5%{content:"\1F347"}75%{content:"\1F349"}87.5%{content:"\1F350"}}
-  #err{display:none;max-width:420px;margin:0 20px;padding:14px 16px;background:#fff;border:1px solid #E2E5CE;border-radius:14px;font-size:14px;line-height:1.5;text-align:center}
-  #err a{color:#4A5424;font-weight:600}
-  /* Aviso para instalar (solo cuando NO está instalada) */
-  #tip{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:3;display:none;gap:12px;align-items:center;background:#333A17;color:#fff;border-radius:16px;padding:12px 14px;font-size:13.5px;line-height:1.4;box-shadow:0 10px 30px rgba(0,0,0,.25)}
-  #tip.on{display:flex}
-  #tip .ic{width:38px;height:38px;border-radius:11px;flex:0 0 38px;background:linear-gradient(135deg,#55612A,#3E4720);display:flex;align-items:center;justify-content:center}
-  #tip .ic svg{width:26px;height:26px}
-  #tip .tx{flex:1}
-  #tip b{color:#C6D287}
-  #tip button{background:transparent;border:0;color:#C6D287;font-size:20px;line-height:1;padding:4px 6px;cursor:pointer}
-</style>
+<!-- Savia se mudó a https://saviamx.github.io — se conserva el ?a=…&t=… del paciente -->
+<script>location.replace('https://saviamx.github.io/' + location.search + location.hash);</script>
+<noscript><meta http-equiv="refresh" content="0; url=https://saviamx.github.io/"></noscript>
+<style>html,body{margin:0;height:100%;background:#F6F7EE;font-family:system-ui,sans-serif;color:#686D55;display:flex;align-items:center;justify-content:center}</style>
 </head>
-<body>
-<div id="splash">
-  <svg class="savia-anim" id="saviaMarca" viewBox="27 -838 2191 950" role="img" aria-label="Savia"><path class="sv-l" style="--i:0" pathLength="1" d="M413 92Q315 92 233.5 63.0Q152 34 102.0 -22.5Q52 -79 47 -162Q45 -196 58.0 -237.0Q71 -278 94.5 -318.5Q118 -359 150.5 -391.5Q183 -424 220 -441Q223 -443 229.5 -444.0Q236 -445 239 -445Q245 -445 245 -442Q245 -437 230 -426Q188 -393 161 -350Q133 -307 119.0 -258.0Q105 -209 105 -159Q105 -100 130.5 -57.5Q156 -15 199.0 12.5Q242 40 297.0 53.0Q352 66 412 66Q479 66 544.5 51.0Q610 36 664 8Q747 -36 795.5 -101.0Q844 -166 844 -230Q844 -264 829.5 -295.0Q815 -326 783 -351Q759 -370 724.5 -387.0Q690 -404 651.5 -420.0Q613 -436 576.0 -452.5Q539 -469 511 -488Q471 -515 452.5 -546.0Q434 -577 434 -608Q434 -645 455.5 -680.0Q477 -715 514.5 -743.5Q552 -772 599 -788Q640 -802 688.5 -810.0Q737 -818 784 -818Q823 -818 858.5 -812.5Q894 -807 921 -793Q955 -777 973.0 -750.5Q991 -724 991 -695Q991 -655 955 -625Q942 -615 926.0 -606.5Q910 -598 888 -592Q884 -591 879 -591Q867 -591 867 -598Q867 -602 873.5 -606.5Q880 -611 893 -612Q923 -616 938.5 -635.0Q954 -654 954 -679Q954 -705 936.5 -730.5Q919 -756 883.0 -773.5Q847 -791 791 -791Q759 -791 720.5 -784.0Q682 -777 637 -761Q582 -742 545.5 -705.0Q509 -668 509 -626Q509 -600 526.5 -573.5Q544 -547 583 -523Q616 -503 658.0 -483.5Q700 -464 743.0 -444.5Q786 -425 821 -403Q876 -369 900.0 -330.0Q924 -291 924 -250Q924 -202 895.5 -153.5Q867 -105 821.0 -62.5Q775 -20 720 13Q656 51 575.5 71.5Q495 92 413 92Z"/><path class="sv-l" style="--i:1" pathLength="1" d="M1202 3Q1179 3 1161.5 -10.0Q1144 -23 1144 -63Q1144 -80 1146.5 -95.0Q1149 -110 1153 -127Q1144 -112 1128.0 -90.0Q1112 -68 1092.5 -47.0Q1073 -26 1052.5 -12.0Q1032 2 1014 2Q988 2 972.0 -21.5Q956 -45 956 -83Q956 -124 975.0 -171.0Q994 -218 1027.0 -261.0Q1060 -304 1103.0 -331.0Q1146 -358 1193 -358Q1216 -358 1237.0 -350.5Q1258 -343 1274 -326Q1281 -319 1281 -310Q1281 -304 1276.0 -300.0Q1271 -296 1263 -298Q1252 -333 1216 -333Q1199 -333 1177 -322Q1150 -308 1119.5 -277.5Q1089 -247 1062.5 -208.5Q1036 -170 1019.0 -131.0Q1002 -92 1002 -60Q1002 -27 1027 -27Q1049 -27 1072.5 -48.0Q1096 -69 1117.5 -100.5Q1139 -132 1157.0 -163.0Q1175 -194 1185 -213Q1200 -240 1213.0 -258.0Q1226 -276 1250 -276Q1261 -276 1272.0 -273.0Q1283 -270 1295 -272Q1265 -242 1242.5 -201.0Q1220 -160 1208.0 -120.5Q1196 -81 1196 -54Q1196 -24 1216 -24Q1232 -24 1250.5 -42.0Q1269 -60 1286.5 -87.5Q1304 -115 1319.0 -143.5Q1334 -172 1343 -193Q1348 -193 1351.5 -192.0Q1355 -191 1355 -184Q1354 -180 1351.5 -175.5Q1349 -171 1344 -160Q1336 -144 1322.0 -117.0Q1308 -90 1289.0 -62.5Q1270 -35 1248.0 -16.0Q1226 3 1202 3Z"/><path class="sv-l" style="--i:2" pathLength="1" d="M1376 7Q1345 7 1333.0 -9.0Q1321 -25 1321 -50Q1321 -76 1330.0 -109.0Q1339 -142 1354 -183Q1343 -183 1343 -193Q1351 -213 1360.5 -238.5Q1370 -264 1370 -296Q1370 -312 1366.0 -323.0Q1362 -334 1354 -336Q1354 -336 1364.5 -338.0Q1375 -340 1387.0 -342.0Q1399 -344 1403 -344Q1409 -345 1414.0 -345.5Q1419 -346 1423 -346Q1433 -346 1436.5 -338.0Q1440 -330 1439 -303Q1438 -278 1429.0 -242.5Q1420 -207 1410 -181Q1397 -147 1386.0 -112.0Q1375 -77 1375 -54Q1375 -34 1386 -28Q1394 -25 1400 -25Q1423 -25 1445.0 -47.0Q1467 -69 1486.5 -100.5Q1506 -132 1519 -161Q1513 -184 1513 -216Q1513 -250 1521.0 -285.0Q1529 -320 1546.0 -343.5Q1563 -367 1590 -367Q1609 -367 1609 -350Q1609 -346 1599.5 -316.0Q1590 -286 1575.0 -245.0Q1560 -204 1543 -166Q1539 -158 1536 -150Q1540 -133 1551.0 -122.5Q1562 -112 1578 -112Q1598 -112 1615.5 -130.5Q1633 -149 1652 -193Q1664 -193 1664 -184Q1648 -144 1625.5 -120.0Q1603 -96 1575 -96Q1541 -96 1526 -131Q1509 -96 1486.0 -64.5Q1463 -33 1435.5 -13.0Q1408 7 1376 7Z"/><path class="sv-l" style="--i:3" pathLength="1" d="M1680 0Q1643 0 1628.0 -21.5Q1613 -43 1613 -71Q1613 -86 1616.5 -101.5Q1620 -117 1625 -130L1692 -301Q1695 -309 1695 -315Q1695 -325 1690.0 -332.5Q1685 -340 1683 -343L1738 -345Q1753 -346 1759.5 -341.5Q1766 -337 1766 -331Q1766 -325 1759 -309Q1749 -285 1732.0 -249.0Q1715 -213 1698.5 -175.0Q1682 -137 1670.5 -104.0Q1659 -71 1659 -53Q1659 -40 1665.5 -31.0Q1672 -22 1688 -22Q1709 -22 1729.5 -38.5Q1750 -55 1768.0 -81.0Q1786 -107 1801.5 -137.0Q1817 -167 1828 -193Q1840 -193 1840 -184Q1830 -159 1814.0 -127.0Q1798 -95 1777.5 -66.5Q1757 -38 1732.5 -19.0Q1708 0 1680 0ZM1769 -407Q1756 -407 1746.5 -417.0Q1737 -427 1737 -441Q1737 -458 1751.0 -471.5Q1765 -485 1782 -485Q1796 -485 1806.0 -476.0Q1816 -467 1816 -453Q1816 -435 1802.0 -421.0Q1788 -407 1769 -407Z"/><path class="sv-l" style="--i:4" pathLength="1" d="M2045 3Q2022 3 2004.5 -10.0Q1987 -23 1987 -63Q1987 -80 1989.5 -95.0Q1992 -110 1996 -127Q1987 -112 1971.0 -90.0Q1955 -68 1935.5 -47.0Q1916 -26 1895.5 -12.0Q1875 2 1857 2Q1831 2 1815.0 -21.5Q1799 -45 1799 -83Q1799 -124 1818.0 -171.0Q1837 -218 1870.0 -261.0Q1903 -304 1946.0 -331.0Q1989 -358 2036 -358Q2059 -358 2080.0 -350.5Q2101 -343 2117 -326Q2124 -319 2124 -310Q2124 -304 2119.0 -300.0Q2114 -296 2106 -298Q2095 -333 2059 -333Q2042 -333 2020 -322Q1993 -308 1962.5 -277.5Q1932 -247 1905.5 -208.5Q1879 -170 1862.0 -131.0Q1845 -92 1845 -60Q1845 -27 1870 -27Q1892 -27 1915.5 -48.0Q1939 -69 1960.5 -100.5Q1982 -132 2000.0 -163.0Q2018 -194 2028 -213Q2043 -240 2056.0 -258.0Q2069 -276 2093 -276Q2104 -276 2115.0 -273.0Q2126 -270 2138 -272Q2108 -242 2085.5 -201.0Q2063 -160 2051.0 -120.5Q2039 -81 2039 -54Q2039 -24 2059 -24Q2075 -24 2093.5 -42.0Q2112 -60 2129.5 -87.5Q2147 -115 2162.0 -143.5Q2177 -172 2186 -193Q2191 -193 2194.5 -192.0Q2198 -191 2198 -184Q2197 -180 2194.5 -175.5Q2192 -171 2187 -160Q2179 -144 2165.0 -117.0Q2151 -90 2132.0 -62.5Q2113 -35 2091.0 -16.0Q2069 3 2045 3Z"/></svg>
-  <div class="s" id="splashTxt">Abriendo tu plan…</div>
-  <div class="fruta" id="dots" aria-hidden="true"></div>
-  <div id="err"></div>
-</div>
-<iframe id="app" title="Savia" allow="clipboard-write; web-share" referrerpolicy="no-referrer-when-downgrade"></iframe>
-<div id="tip" role="status">
-  <div class="ic"><svg style="width:30px;height:auto;color:#F6F7EE" viewBox="27 -838 2191 950" role="img" aria-label="Savia" fill="currentColor"><path d="M413 92Q315 92 233.5 63.0Q152 34 102.0 -22.5Q52 -79 47 -162Q45 -196 58.0 -237.0Q71 -278 94.5 -318.5Q118 -359 150.5 -391.5Q183 -424 220 -441Q223 -443 229.5 -444.0Q236 -445 239 -445Q245 -445 245 -442Q245 -437 230 -426Q188 -393 161 -350Q133 -307 119.0 -258.0Q105 -209 105 -159Q105 -100 130.5 -57.5Q156 -15 199.0 12.5Q242 40 297.0 53.0Q352 66 412 66Q479 66 544.5 51.0Q610 36 664 8Q747 -36 795.5 -101.0Q844 -166 844 -230Q844 -264 829.5 -295.0Q815 -326 783 -351Q759 -370 724.5 -387.0Q690 -404 651.5 -420.0Q613 -436 576.0 -452.5Q539 -469 511 -488Q471 -515 452.5 -546.0Q434 -577 434 -608Q434 -645 455.5 -680.0Q477 -715 514.5 -743.5Q552 -772 599 -788Q640 -802 688.5 -810.0Q737 -818 784 -818Q823 -818 858.5 -812.5Q894 -807 921 -793Q955 -777 973.0 -750.5Q991 -724 991 -695Q991 -655 955 -625Q942 -615 926.0 -606.5Q910 -598 888 -592Q884 -591 879 -591Q867 -591 867 -598Q867 -602 873.5 -606.5Q880 -611 893 -612Q923 -616 938.5 -635.0Q954 -654 954 -679Q954 -705 936.5 -730.5Q919 -756 883.0 -773.5Q847 -791 791 -791Q759 -791 720.5 -784.0Q682 -777 637 -761Q582 -742 545.5 -705.0Q509 -668 509 -626Q509 -600 526.5 -573.5Q544 -547 583 -523Q616 -503 658.0 -483.5Q700 -464 743.0 -444.5Q786 -425 821 -403Q876 -369 900.0 -330.0Q924 -291 924 -250Q924 -202 895.5 -153.5Q867 -105 821.0 -62.5Q775 -20 720 13Q656 51 575.5 71.5Q495 92 413 92Z"/><path d="M1202 3Q1179 3 1161.5 -10.0Q1144 -23 1144 -63Q1144 -80 1146.5 -95.0Q1149 -110 1153 -127Q1144 -112 1128.0 -90.0Q1112 -68 1092.5 -47.0Q1073 -26 1052.5 -12.0Q1032 2 1014 2Q988 2 972.0 -21.5Q956 -45 956 -83Q956 -124 975.0 -171.0Q994 -218 1027.0 -261.0Q1060 -304 1103.0 -331.0Q1146 -358 1193 -358Q1216 -358 1237.0 -350.5Q1258 -343 1274 -326Q1281 -319 1281 -310Q1281 -304 1276.0 -300.0Q1271 -296 1263 -298Q1252 -333 1216 -333Q1199 -333 1177 -322Q1150 -308 1119.5 -277.5Q1089 -247 1062.5 -208.5Q1036 -170 1019.0 -131.0Q1002 -92 1002 -60Q1002 -27 1027 -27Q1049 -27 1072.5 -48.0Q1096 -69 1117.5 -100.5Q1139 -132 1157.0 -163.0Q1175 -194 1185 -213Q1200 -240 1213.0 -258.0Q1226 -276 1250 -276Q1261 -276 1272.0 -273.0Q1283 -270 1295 -272Q1265 -242 1242.5 -201.0Q1220 -160 1208.0 -120.5Q1196 -81 1196 -54Q1196 -24 1216 -24Q1232 -24 1250.5 -42.0Q1269 -60 1286.5 -87.5Q1304 -115 1319.0 -143.5Q1334 -172 1343 -193Q1348 -193 1351.5 -192.0Q1355 -191 1355 -184Q1354 -180 1351.5 -175.5Q1349 -171 1344 -160Q1336 -144 1322.0 -117.0Q1308 -90 1289.0 -62.5Q1270 -35 1248.0 -16.0Q1226 3 1202 3Z"/><path d="M1376 7Q1345 7 1333.0 -9.0Q1321 -25 1321 -50Q1321 -76 1330.0 -109.0Q1339 -142 1354 -183Q1343 -183 1343 -193Q1351 -213 1360.5 -238.5Q1370 -264 1370 -296Q1370 -312 1366.0 -323.0Q1362 -334 1354 -336Q1354 -336 1364.5 -338.0Q1375 -340 1387.0 -342.0Q1399 -344 1403 -344Q1409 -345 1414.0 -345.5Q1419 -346 1423 -346Q1433 -346 1436.5 -338.0Q1440 -330 1439 -303Q1438 -278 1429.0 -242.5Q1420 -207 1410 -181Q1397 -147 1386.0 -112.0Q1375 -77 1375 -54Q1375 -34 1386 -28Q1394 -25 1400 -25Q1423 -25 1445.0 -47.0Q1467 -69 1486.5 -100.5Q1506 -132 1519 -161Q1513 -184 1513 -216Q1513 -250 1521.0 -285.0Q1529 -320 1546.0 -343.5Q1563 -367 1590 -367Q1609 -367 1609 -350Q1609 -346 1599.5 -316.0Q1590 -286 1575.0 -245.0Q1560 -204 1543 -166Q1539 -158 1536 -150Q1540 -133 1551.0 -122.5Q1562 -112 1578 -112Q1598 -112 1615.5 -130.5Q1633 -149 1652 -193Q1664 -193 1664 -184Q1648 -144 1625.5 -120.0Q1603 -96 1575 -96Q1541 -96 1526 -131Q1509 -96 1486.0 -64.5Q1463 -33 1435.5 -13.0Q1408 7 1376 7Z"/><path d="M1680 0Q1643 0 1628.0 -21.5Q1613 -43 1613 -71Q1613 -86 1616.5 -101.5Q1620 -117 1625 -130L1692 -301Q1695 -309 1695 -315Q1695 -325 1690.0 -332.5Q1685 -340 1683 -343L1738 -345Q1753 -346 1759.5 -341.5Q1766 -337 1766 -331Q1766 -325 1759 -309Q1749 -285 1732.0 -249.0Q1715 -213 1698.5 -175.0Q1682 -137 1670.5 -104.0Q1659 -71 1659 -53Q1659 -40 1665.5 -31.0Q1672 -22 1688 -22Q1709 -22 1729.5 -38.5Q1750 -55 1768.0 -81.0Q1786 -107 1801.5 -137.0Q1817 -167 1828 -193Q1840 -193 1840 -184Q1830 -159 1814.0 -127.0Q1798 -95 1777.5 -66.5Q1757 -38 1732.5 -19.0Q1708 0 1680 0ZM1769 -407Q1756 -407 1746.5 -417.0Q1737 -427 1737 -441Q1737 -458 1751.0 -471.5Q1765 -485 1782 -485Q1796 -485 1806.0 -476.0Q1816 -467 1816 -453Q1816 -435 1802.0 -421.0Q1788 -407 1769 -407Z"/><path d="M2045 3Q2022 3 2004.5 -10.0Q1987 -23 1987 -63Q1987 -80 1989.5 -95.0Q1992 -110 1996 -127Q1987 -112 1971.0 -90.0Q1955 -68 1935.5 -47.0Q1916 -26 1895.5 -12.0Q1875 2 1857 2Q1831 2 1815.0 -21.5Q1799 -45 1799 -83Q1799 -124 1818.0 -171.0Q1837 -218 1870.0 -261.0Q1903 -304 1946.0 -331.0Q1989 -358 2036 -358Q2059 -358 2080.0 -350.5Q2101 -343 2117 -326Q2124 -319 2124 -310Q2124 -304 2119.0 -300.0Q2114 -296 2106 -298Q2095 -333 2059 -333Q2042 -333 2020 -322Q1993 -308 1962.5 -277.5Q1932 -247 1905.5 -208.5Q1879 -170 1862.0 -131.0Q1845 -92 1845 -60Q1845 -27 1870 -27Q1892 -27 1915.5 -48.0Q1939 -69 1960.5 -100.5Q1982 -132 2000.0 -163.0Q2018 -194 2028 -213Q2043 -240 2056.0 -258.0Q2069 -276 2093 -276Q2104 -276 2115.0 -273.0Q2126 -270 2138 -272Q2108 -242 2085.5 -201.0Q2063 -160 2051.0 -120.5Q2039 -81 2039 -54Q2039 -24 2059 -24Q2075 -24 2093.5 -42.0Q2112 -60 2129.5 -87.5Q2147 -115 2162.0 -143.5Q2177 -172 2186 -193Q2191 -193 2194.5 -192.0Q2198 -191 2198 -184Q2197 -180 2194.5 -175.5Q2192 -171 2187 -160Q2179 -144 2165.0 -117.0Q2151 -90 2132.0 -62.5Q2113 -35 2091.0 -16.0Q2069 3 2045 3Z"/></svg></div>
-  <div class="tx" id="tipTxt"></div>
-  <button type="button" aria-label="Cerrar" onclick="cerrarTip()">×</button>
-</div>
-<script>
-(function(){
-  var q = new URLSearchParams(location.search);
-  var a = String(q.get('a') || '').trim();      // ID de la implementación de Apps Script
-  var t = String(q.get('t') || '').trim();      // token del paciente
-  var okA = /^[A-Za-z0-9_-]{20,}$/.test(a), okT = /^[A-Za-z0-9_-]{4,64}$/.test(t);
-  var err = document.getElementById('err'), fr = document.getElementById('app');
-  if (!okA || !okT){
-    document.getElementById('dots').style.display = 'none';
-    document.getElementById('splashTxt').textContent = '';
-    err.style.display = 'block';
-    err.innerHTML = 'Este enlace está incompleto. Pide a tu consultorio que te comparta de nuevo tu liga de Savia.';
-    return;
-  }
-  var destino = 'https://script.google.com/macros/s/' + a + '/exec?page=paciente&t=' + encodeURIComponent(t);
-  var listo = false;
-  function quitarSplash(){ if (listo) return; listo = true; document.getElementById('splash').classList.add('off'); }
-  fr.addEventListener('load', function(){ setTimeout(quitarSplash, 250); });
-  fr.src = destino;
-  // Mensajes mientras Google abre la app (en celular puede tardar 10-20 s la primera vez).
-  var MSGS = ['Abriendo tu plan…', 'Conectando con tu consultorio…', 'Google está preparando tu app…', 'Ya casi…'];
-  var mi = 0;
-  var rot = setInterval(function(){ if (listo){ clearInterval(rot); return; } mi = Math.min(mi + 1, MSGS.length - 1); document.getElementById('splashTxt').textContent = MSGS[mi]; }, 5000);
-  // Si de plano no llega, se deja un enlace directo de respaldo.
-  setTimeout(function(){
-    if (listo) return;
-    err.style.display = 'block';
-    err.innerHTML = 'Está tardando más de lo normal. <a href="' + destino + '">Abrir directo en el navegador</a>';
-    setTimeout(quitarSplash, 8000);
-  }, 30000);
-
-  // Aviso de instalación (una vez por dispositivo, solo si no está instalada)
-  var standalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
-  var visto = false; try { visto = localStorage.getItem('savia_tip_inicio') === '1'; } catch(e){}
-  var ua = navigator.userAgent || '';
-  var esIOS = /iPhone|iPad|iPod/.test(ua), esAndroid = /Android/.test(ua);
-  if (!standalone && !visto && (esIOS || esAndroid)){
-    var txt = esIOS
-      ? 'Ten tu plan a la mano: toca <b>Compartir</b> <span style="font-size:15px">⎙</span> y luego <b>Agregar a pantalla de inicio</b>.'
-      : 'Ten tu plan a la mano: abre el menú <b>⋮</b> y elige <b>Agregar a pantalla de inicio</b>.';
-    document.getElementById('tipTxt').innerHTML = txt;
-    setTimeout(function(){ document.getElementById('tip').classList.add('on'); }, 2500);
-  }
-  window.cerrarTip = function(){ document.getElementById('tip').classList.remove('on'); try { localStorage.setItem('savia_tip_inicio', '1'); } catch(e){} };
-})();
-</script>
-</body>
+<body>Abriendo Savia…</body>
 </html>
